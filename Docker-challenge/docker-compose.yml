@@ -1,0 +1,35 @@
+
+services : # defining the services that make up the application
+  web:     # defining the web service
+    build: .  # building the Docker image from the current directory
+    expose:               
+      - "5002"      # mapping port 5002 of the host to port 5002 of the container
+    depends_on:          
+      - redis            # specifying that the web service depends on the redis service
+    environment:         # setting environment variables for the web service, this allows configuration of the Redis host and port, making the application more flexible.
+    - REDIS_HOST=redis
+    - REDIS_PORT=6379 
+  redis:
+    image: "redis:latest"    # using the official Redis image from Docker Hub
+    ports:
+      - "6379:6379"          # mapping port 6379 of the host to port 6379 of the container
+    volumes:
+        - redis-data:/data   # persisting Redis data using a named volume
+
+  nginx:
+    image: nginx:latest
+    ports:
+    - "5002:5002"
+    volumes:
+    - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - web    
+
+
+
+volumes:
+  redis-data:                 # defining a named volume for Redis data persistence
+
+
+
+      
