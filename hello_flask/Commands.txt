@@ -1,0 +1,36 @@
+
+All the neccesary commands
+
+To build the Docker image, use:
+docker build -t hello_flask .
+
+This commands 
+docker run -d -p 5002:5002 hello-flask,
+
+To check Network logs command
+docker network ls 
+
+This prints a list of all images used
+docker images 
+
+This commands give more comprehensive details of the image. 
+docker Inspect <image:ID>
+
+This commands helps clean up the environement by deleting unused docker objects. 
+docker rmi <image:ID>
+
+This command is simialir to code 21, but cleans all unused  docker objects. 
+docker system prune 
+
+This commands is used to check running comtainers. 
+docker ps 
+
+This command is used to stop any running commands. 
+docker stop <Container:ID>
+
+This command is used to completely remove stop state containers. done when trying to free up space. 
+dcoker rm <Container:ID>
+
+This command create custom networks with docker 
+network create <network_name>
+

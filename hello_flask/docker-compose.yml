@@ -1,0 +1,16 @@
+version: '3.8' # specifying the version of docker-compose file format
+
+services:  # defining the services that make up the application
+  web: # defining the web service
+    image: my-flask-app:multistage # using a specific Docker image from AWS ECR
+    build: .    # building the Docker image from the current directory
+    ports:     # mapping ports between the host and the container
+      - "5002:5002"  # mapping port 5002 of the host to port 5002 of the container
+    depends_on:
+      - mydb # specifying that the web service depends on the mydb service
+
+  mydb: # defining the mydb service
+    image: mysql:8 # using the official MySQL version 8 image from Docker Hub
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw # setting the root password for MySQL
+
